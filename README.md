@@ -1,102 +1,102 @@
 # 🚗 Smart Parking Management (Rennes Métropole)
 
-> **Visualisation en temps réel de l'occupation des parcs-relais.**
-> Un projet Python illustrant l'évolution d'une solution : du traitement algorithmique brut à l'utilisation des standards industriels.
+> **Real-time visualization of park-and-ride occupancy.**
+> A Python project illustrating the evolution of a solution: from raw algorithmic processing to the use of industry standards.
 
-Ce projet se connecte à l'API Open Data de Rennes Métropole pour récupérer les données de stationnement en temps réel. Il traite ces informations pour générer une **carte interactive** permettant aux usagers de visualiser instantanément la disponibilité des places via un code couleur intuitif.
+This project connects to the Rennes Métropole Open Data API to retrieve real-time parking data. It processes this information to generate an **interactive map** that allows users to instantly visualize parking availability through an intuitive color-coded system.
 
 ---
 
-### Architecture du Projet : Une approche évolutive
+### Project Architecture: An Evolutionary Approach
 
-Ce dépôt contient les différentes itérations du projet ainsi que la configuration de déploiement.
+This repository contains the different iterations of the project as well as the deployment configuration.
 
-#### 1. `main.py` (Version Production - Recommandée)
-* **Concept :** Approche professionnelle utilisant les bibliothèques standards.
-* **Technique :**
-    * **JSON Parsing :** Utilisation du module `json` pour transformer la réponse API en structures de données Python.
-    * **Datetime :** Manipulation temporelle via le module `datetime` pour un horodatage précis.
-* **Avantage :** Code robuste, maintenable et conforme aux standards. C'est le point d'entrée principal.
+#### 1. `main.py` (Production Version - Recommended)
+* **Concept:** Professional approach using standard libraries.
+* **Technique:**
+    * **JSON Parsing:** Uses the `json` module to transform the API response into Python data structures.
+    * **Datetime:** Time manipulation via the `datetime` module for precise timestamping.
+* **Advantage:** Robust, maintainable code that complies with industry standards. This is the main entry point.
 
-#### 2. `manual_parsing.py` (Version Algorithmique)
-* **Concept :** Traitement "bas niveau" des données brutes.
-* **Technique :** Les données sont traitées comme une chaîne de caractères (`string`). L'extraction se fait via des algorithmes de découpage manuels.
-* **Objectif :** Démontrer la capacité à manipuler des données brutes sans parseur automatique.
+#### 2. `manual_parsing.py` (Algorithmic Version)
+* **Concept:** "Low-level" processing of raw data.
+* **Technique:** Data is handled as a string. Extraction is performed through manual slicing algorithms.
+* **Purpose:** Demonstrates the ability to manipulate raw data without an automatic parser.
 
-#### 3. `Dockerfile` (Déploiement) 🐳
-* **Concept :** Environnement d'exécution isolé.
-* **Technique :** Script de configuration pour conteneuriser l'application.
-* **Objectif :** Garantir que le code fonctionne sur n'importe quelle machine sans installation préalable de Python ou des bibliothèques.
+#### 3. `Dockerfile` (Deployment) 🐳
+* **Concept:** Isolated execution environment.
+* **Technique:** Configuration script to containerize the application.
+* **Purpose:** Ensures the code runs on any machine without requiring Python or the libraries to be pre-installed.
 
 #### 4. `Map.Rennes.html`
-* Le fichier de sortie : une carte HTML interactive visualisable dans n'importe quel navigateur.
+* The output file: an interactive HTML map viewable in any web browser.
 
 ---
 
-### Fonctionnement Technique
+### Technical Overview
 
-1.  **Connexion API :** Requête HTTP via `requests` vers l'API Open Data de Rennes (`tco-parcsrelais-star-etat-tr`).
-2.  **Calculs Métiers :**
-    * Calcul du taux d'occupation : `(Capacité Max - Places Dispo) / Capacité Max`.
-3.  **Logique de Visualisation :**
-    * 🟢 **Vert :** Remplissage < 50%
-    * 🟠 **Orange :** Remplissage entre 50% et 80%
-    * 🔴 **Rouge :** Remplissage > 80%
-4.  **Rendu Géographique :** Génération de marqueurs dynamiques (taille proportionnelle au taux) sur fond OpenStreetMap via la bibliothèque **Folium**.
+1.  **API Connection:** HTTP request via `requests` to the Rennes Open Data API (`tco-parcsrelais-star-etat-tr`).
+2.  **Business Logic:**
+    * Occupancy rate calculation: `(Max Capacity - Available Spots) / Max Capacity`.
+3.  **Visualization Logic:**
+    * 🟢 **Green:** Occupancy < 50%
+    * 🟠 **Orange:** Occupancy between 50% and 80%
+    * 🔴 **Red:** Occupancy > 80%
+4.  **Geographic Rendering:** Dynamic markers (size proportional to occupancy rate) generated on an OpenStreetMap background using the **Folium** library.
 
 ---
 
-### Stack Technique
+### Tech Stack
 
-| Catégorie | Technologies |
+| Category | Technologies |
 | :--- | :--- |
-| **Langage** | ![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat&logo=python&logoColor=white) |
+| **Language** | ![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat&logo=python&logoColor=white) |
 | **Data & API** | `Requests` `JSON` `Open Data API` |
-| **Géolocalisation** | `Folium` (Leaflet.js wrapper) |
-| **Déploiement** | ![Docker](https://img.shields.io/badge/Docker-Container-2496ED?style=flat&logo=docker&logoColor=white) |
+| **Geolocation** | `Folium` (Leaflet.js wrapper) |
+| **Deployment** | ![Docker](https://img.shields.io/badge/Docker-Container-2496ED?style=flat&logo=docker&logoColor=white) |
 
 ---
 
-### Installation & Utilisation
+### Installation & Usage
 
-Vous pouvez lancer ce projet de deux manières : via Python classique ou via Docker (recommandé pour la portabilité).
+You can run this project in two ways: using standard Python or via Docker (recommended for portability).
 
-#### Option A : Lancement Standard (Python)
+#### Option A: Standard Launch (Python)
 
-1.  **Cloner le dépôt :**
-    ```bash
-    git clone [https://github.com/ton-pseudo/smart-parking-management.git](https://github.com/ton-pseudo/smart-parking-management.git)
+1.  **Clone the repository:**
+```bash
+    git clone https://github.com/your-username/smart-parking-management.git
     cd smart-parking-management
-    ```
+```
 
-2.  **Installer les dépendances :**
-    ```bash
+2.  **Install dependencies:**
+```bash
     pip install requests folium
-    ```
+```
 
-3.  **Lancer le script :**
-    ```bash
+3.  **Run the script:**
+```bash
     python main.py
-    ```
+```
 
-#### Option B : Lancement via Docker 🐳
+#### Option B: Docker Launch 🐳
 
-Cette méthode ne nécessite pas d'installer Python ou les librairies sur votre machine.
+This method does not require Python or the libraries to be installed on your machine.
 
-1.  **Construire l'image :**
-    ```bash
+1.  **Build the image:**
+```bash
     docker build -t parking-rennes .
-    ```
+```
 
-2.  **Lancer le conteneur :**
-    ```bash
+2.  **Run the container:**
+```bash
     docker run --rm -v ${PWD}:/app parking-rennes
-    ```
-    *(Cette commande monte le volume pour que le fichier `Map.Rennes.html` soit généré directement dans votre dossier actuel).*
+```
+    *(This command mounts the volume so that the `Map.Rennes.html` file is generated directly in your current folder).*
 
 ---
-#### 👁️ Résultat
-Dans les deux cas, ouvrez le fichier `Map.Rennes.html` généré avec votre navigateur web préféré pour consulter la carte.
+#### 👁️ Result
+In both cases, open the generated `Map.Rennes.html` file in your preferred web browser to view the map.
 
 ---
-*Nolan Nedelec - Développé dans le cadre du cursus ingénieur ISEN Ouest.*
+*Nolan Nedelec - Developed as part of the ISEN Ouest engineering curriculum.*
