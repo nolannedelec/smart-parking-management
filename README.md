@@ -65,7 +65,7 @@ You can run this project in two ways: using standard Python or via Docker (recom
 
 1.  **Clone the repository:**
 ```bash
-    git clone https://github.com/your-username/smart-parking-management.git
+    git clone https://github.com/nolannedelec/smart-parking-management.git
     cd smart-parking-management
 ```
 
